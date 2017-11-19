@@ -1,4 +1,4 @@
-In case it is of interest to someone, here is what I did to get it running:
+Here is what I did to get it running:
 
  1. **Create a new GPG key**
  
