@@ -1,4 +1,6 @@
-Here is what I did to get it running:
+# Sign git commits
+
+Here is what I did to get all commits and tags signed by default and recognized as **Verified** by Github:
 
  1. **Create a new GPG key**
  
@@ -17,8 +19,8 @@ Here is what I did to get it running:
     I created a `4096-bit` `RSA/RSA` key that `don't expire` and with
     the name set to the same value of the git config `user.name`, and
     the email set to the git `user.email`. It is important that this
-    values are equal and that you don't add no comment to allow git
-    to correctly get the suitable key automatically.
+    values are equal and that you don't add any comment to the key
+    to allow git to correctly get the suitable key automatically.
 
 2. **Add the key to Github**
     
@@ -51,11 +53,11 @@ Here is what I did to get it running:
        
 4. **Add the GPG key passphrase to the gpg-agent**
    
-   In Ubuntu, I only have to use once the key (`gpg2 --sign --default-key <key-id>`)
-   and in the dialog that appears asking me the passphrase for it it will
-   have a checkbox to add it to the keyring (ie. remember it).
-   So, check it and you won't have to type it anymore while logged into
-   the agent (which is logged in automatically when you login on the X session).
+   In Ubuntu, I only have to use the key once (`gpg2 --sign --default-key <key-id>`)
+   and in the dialog that appears asking me the passphrase of the key it will
+   also have a checkbox to add the passphrase to the keyring (ie. remember it).
+   So, check it and you won't have to type the passphrase anymore while the gpg-agent
+   is running (which is automatically started when you log-in on the X session).
 
 5. [OPTIONAL] **Tell git what key to use for signing**
    
@@ -75,12 +77,13 @@ Here is what I did to get it running:
    GPG key.
    
    GPG keys can have multiple identities (ie. name-email combinations),
-   and adding one will modify the key id, meaning that you don't have to change
-   the key in every site you have uploaded it too (like GitHub). Just add it
-   and update the key in the relevant site (the site of the specific repo usually).
+   and adding one will not modify the key id, meaning that you don't have to change
+   the key in every site you have uploaded it to (like GitHub). Just add the new
+   identity (with `gpg2 --edit-key <key-id>` and then typing `adduid`) and upload
+   the new exported key to the relevant site (the site of the specific repo usually).
    
-   Ok, if you don't followed the advice or want to use a key with different name
-   or email as your git name and email, or simply want to add a comment to the
+   If you didn't follow the advice or want to use a key with different name
+   or email than your git name and email, or simply want to add a comment to the
    key identify and you don't want to have multiple identities as I have talked
    about before, you can tell git to always use the same key for every sign
    operation with the following command:
@@ -100,6 +103,6 @@ Here is what I did to get it running:
    
    In git, you can use `git log --show-signature` to display the signature info,
    or `git log --format=raw` to view the raw signatures in armored format (so that
-   you can pass them to `gpg2` for inspection).
+   you can input them to `gpg2` for inspection).
    Use `git tag -v tag-name` to verify a signed tag.
    
