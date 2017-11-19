@@ -98,3 +98,8 @@ In case it is of interest to someone, here is what I did to get it running:
    You can confirm in the GitHub web interface that it is working correctly
    by looking at the **Verified** tag of the commits.
    
+   In git, you can use `git log --show-signature` to display the signature info,
+   or `git log --format=raw` to view the raw signatures in armored format (so that
+   you can pass them to `gpg2` for inspection).
+   Use `git tag -v tag-name` to verify a signed tag.
+   
